@@ -15,10 +15,12 @@ def main(interval, port, labels):
 
     label_dict = dict([label.split("=") for label in labels])
 
-    co2_gauge = Gauge("scd30_co2", "SCD30 CO2 reading")
-    temp_gauge = Gauge("scd30_temp", "SCD30 temperature reading")
-    rh_gauge = Gauge("scd30_rh", "SCD30 relative humidity reading")
-    last_read_gauge = Gauge("scd30_last_read", "SCD30 last read timestamp")
+    co2_gauge = Gauge("scd30_co2", "SCD30 CO2 reading", label_dict.keys())
+    temp_gauge = Gauge("scd30_temp", "SCD30 temperature reading", label_dict.keys())
+    rh_gauge = Gauge("scd30_rh", "SCD30 relative humidity reading", label_dict.keys())
+    last_read_gauge = Gauge(
+        "scd30_last_read", "SCD30 last read timestamp", label_dict.keys()
+    )
     start_http_server(port)
 
     while True:
